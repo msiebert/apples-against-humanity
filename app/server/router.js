@@ -1,8 +1,10 @@
+const HomeController = require('./controllers/home')
+
 const init = function(app) {
+  var homeController = new HomeController()
+
   app.get('/', (request, response) => {
-    response.render('home', {
-      name: 'World'
-    })
+    homeController.main(response)
   })
 }
 
