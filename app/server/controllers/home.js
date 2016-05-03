@@ -1,12 +1,14 @@
+// @flow
+
 /**
  * Handle requests for the home page.
  */
-class Home {
-  main(response) {
+class HomeController {
+  main(response: ExpressResponse) {
     response.render('home', {
       name: 'World'
     })
   }
 }
 
-module.exports = Home
+module.exports = HomeController

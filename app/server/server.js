@@ -1,10 +1,12 @@
+// @flow
+
 const express = require('express')
 const expressHandlebars = require('express-handlebars')
 const path = require('path')
 
 const router = require('./router')
 
-const port = 3000
+const port: number = 3000
 
 const run = function() {
   const app = express()

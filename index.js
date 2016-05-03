@@ -1,1 +1,3 @@
+// @flow
+
 require('./app/index')
