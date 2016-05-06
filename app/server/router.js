@@ -1,12 +1,12 @@
 // @flow
 
-const HomeController = require('./controllers/home')
+import MasterController from './controllers/master'
 
 const init = function(app: ExpressApp) {
-  var homeController = new HomeController()
+  var masterController = new MasterController()
 
   app.get('/', (request, response) => {
-    homeController.main(response)
+    masterController.main(response)
   })
 }
 

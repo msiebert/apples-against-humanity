@@ -1,21 +1,28 @@
 // @flow
 
-const express = require('express')
-const expressHandlebars = require('express-handlebars')
-const path = require('path')
+import express from 'express'
+import expressHandlebars from 'express-handlebars'
+import path from 'path'
+import webpack from 'webpack'
+import webpackMiddleware from 'webpack-dev-middleware'
 
-const router = require('./router')
+import router from './router'
+import {masterConfig} from '../../webpack.config.js'
 
 const port: number = 3000
 
 const run = function() {
   const app = express()
 
+  const masterClientCompiler = webpack(masterConfig)
+
+  app.use('/', webpackMiddleware(masterClientCompiler))
+
   // set up handlebars
   app.engine('.hbs', expressHandlebars({
     defaultLayout: 'main',
     extname: '.hbs',
-    layoutsDir: path.join(__dirname, 'views/layouts')
+    layoutsDir: path.join(__dirname, 'views/layouts'),
   }))
   app.set('view engine', '.hbs')
   app.set('views', path.join(__dirname, 'views'))

@@ -1,5 +1,5 @@
 // @flow
 
-const server = require('./server/server')
+import server from './server/server'
 
 server.run()

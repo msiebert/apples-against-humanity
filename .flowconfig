@@ -1,2 +1,5 @@
 [libs]
 ./interfaces/
+[ignore]
+.*/node_modules/babel*
+.*/node_modules/fbjs/.*
