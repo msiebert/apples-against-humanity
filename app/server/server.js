@@ -2,21 +2,27 @@
 
 import express from 'express'
 import expressHandlebars from 'express-handlebars'
+import http from 'http'
 import path from 'path'
+import socketIO from 'socket.io'
 import webpack from 'webpack'
 import webpackMiddleware from 'webpack-dev-middleware'
 
+import config from '../common/config'
+import SocketCommands from '../common/socketcommands'
 import router from './router'
-import {masterConfig} from '../../webpack.config.js'
+import {gameConfig} from '../../webpack.config.js'
 
 const port: number = 3000
 
 const run = function() {
   const app = express()
+  const socketServer = http.createServer(app)
+  const io = socketIO(socketServer)
 
-  const masterClientCompiler = webpack(masterConfig)
+  const gameClientCompiler = webpack(gameConfig)
 
-  app.use('/', webpackMiddleware(masterClientCompiler))
+  app.use('/', webpackMiddleware(gameClientCompiler))
 
   // set up handlebars
   app.engine('.hbs', expressHandlebars({
@@ -37,6 +43,17 @@ const run = function() {
     }
 
     console.log(`server is listening on ${port}`)
+  })
+
+  configureSockets(io)
+  socketServer.listen(port + 1)
+}
+
+const configureSockets = function(io) {
+  io.sockets.on('connection', (socket) => {
+    socket.on(SocketCommands.joinRoom, (room) => {
+      socket.join(room)
+    })
   })
 }
 

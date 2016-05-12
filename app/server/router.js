@@ -1,12 +1,12 @@
 // @flow
 
-import MasterController from './controllers/master'
+import GameController from './controllers/game'
 
 const init = function(app: ExpressApp) {
-  var masterController = new MasterController()
+  var gameController = new GameController()
 
   app.get('/', (request, response) => {
-    masterController.main(response)
+    gameController.main(response)
   })
 }
 

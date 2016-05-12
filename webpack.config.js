@@ -1,13 +1,13 @@
 import path from 'path'
 
-const masterConfig = {
+const gameConfig = {
   // Gives you sourcemaps without slowing down rebundling
   devtool: 'eval-source-map',
-  entry: path.join(__dirname, 'app/client/master/index.js'),
+  entry: path.join(__dirname, 'app/client/game/index.js'),
   output: {
     path: path.resolve('./dist'),
-    filename: 'master.js',
-    publicPath: '/master'
+    filename: 'game.js',
+    publicPath: '/game'
   },
   module: {
     loaders: [
@@ -26,5 +26,5 @@ const masterConfig = {
 }
 
 module.exports = {
-  masterConfig: masterConfig
+  gameConfig: gameConfig
 }
