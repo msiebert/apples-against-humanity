@@ -1,5 +1,6 @@
 // @flow
 
 module.exports = {
-  joinRoom: 'room'
+  joinRoom: 'room',
+  addPlayer: 'add player'
 }
