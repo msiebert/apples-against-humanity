@@ -25,5 +25,5 @@ socket.on(SocketCommands.addPlayer, (name) => {
 
 ReactDOM.render(
   React.createElement(HelloWorld, null),
-  document.getElementById('body')
+  document.getElementById('root')
 )

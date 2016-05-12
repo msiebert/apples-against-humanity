@@ -11,7 +11,7 @@ import webpackMiddleware from 'webpack-dev-middleware'
 import config from '../common/config'
 import SocketCommands from '../common/socketcommands'
 import router from './router'
-import {gameConfig} from '../../webpack.config.js'
+import {gameConfig, playerConfig} from '../../webpack.config.js'
 
 const port: number = 3000
 
@@ -21,8 +21,10 @@ const run = function() {
   const io = socketIO(socketServer)
 
   const gameClientCompiler = webpack(gameConfig)
+  const playerClientCompiler = webpack(playerConfig)
 
   app.use('/', webpackMiddleware(gameClientCompiler))
+  app.use('/', webpackMiddleware(playerClientCompiler))
 
   // set up handlebars
   app.engine('.hbs', expressHandlebars({

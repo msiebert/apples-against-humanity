@@ -1,7 +1,6 @@
 import path from 'path'
 
 const gameConfig = {
-  // Gives you sourcemaps without slowing down rebundling
   devtool: 'eval-source-map',
   entry: path.join(__dirname, 'app/client/game/index.js'),
   output: {
@@ -25,6 +24,31 @@ const gameConfig = {
   }
 }
 
+const playerConfig = {
+  devtool: 'eval-source-map',
+  entry: path.join(__dirname, 'app/client/player/index.js'),
+  output: {
+    path: path.resolve('./dist'),
+    filename: 'player.js',
+    publicPath: '/player'
+  },
+  module: {
+    loaders: [
+      {
+        test: /\.js$/,
+        exclude: /node_modules/,
+        loader: 'babel'
+      },
+      {
+        test: /\.jsx$/,
+        loaders: ['babel'],
+        include: path.join(__dirname, 'app')
+      }
+    ]
+  }
+}
+
 module.exports = {
-  gameConfig: gameConfig
+  gameConfig,
+  playerConfig
 }
