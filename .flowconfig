@@ -1,5 +1,19 @@
 [libs]
 ./interfaces/
+./node_modules/flow-interfaces/interfaces
+
 [ignore]
 .*/node_modules/babel*
 .*/node_modules/fbjs/.*
+.*/node_modules/postcss*
+
+[options]
+module.name_mapper='^.*\(\.scss\)$' -> 'CSSModule'
+module.system=haste
+
+# set up better imports
+module.name_mapper='^common\/\(.*\)$' -> '<PROJECT_ROOT>/app/common/\1'
+module.name_mapper='^game\/\(.*\)$' -> '<PROJECT_ROOT>/app/client/game/\1'
+module.name_mapper='^player\/\(.*\)$' -> '<PROJECT_ROOT>/app/client/player/\1'
+module.name_mapper='^server\/\(.*\)$' -> '<PROJECT_ROOT>/app/server/\1'
+module.name_mapper='^styles\/\(.*\)$' -> '<PROJECT_ROOT>/app/styles/\1'

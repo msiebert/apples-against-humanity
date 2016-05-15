@@ -2,5 +2,6 @@
 
 module.exports = {
   joinRoom: 'room',
-  addPlayer: 'add player'
+  addPlayer: 'add player',
+  setPlayerColor: 'player color',
 }

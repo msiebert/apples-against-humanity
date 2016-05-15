@@ -2,8 +2,8 @@
 
 import MainController from './controllers/main'
 
-const init = function(app: ExpressApp) {
-  var mainController = new MainController()
+const init = function(app: ExpressApp, ipAddress: string) {
+  var mainController = new MainController(ipAddress)
 
   app.get('/game', (request, response) => {
     mainController.game(response)

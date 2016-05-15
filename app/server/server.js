@@ -3,17 +3,19 @@
 import express from 'express'
 import expressHandlebars from 'express-handlebars'
 import http from 'http'
+import os from 'os'
 import path from 'path'
 import socketIO from 'socket.io'
 import webpack from 'webpack'
 import webpackMiddleware from 'webpack-dev-middleware'
 
-import config from '../common/config'
+import Colors from '../common/colors'
+import * as config from '../common/config'
 import SocketCommands from '../common/socketcommands'
-import router from './router'
-import {gameConfig, playerConfig} from '../../webpack.config.js'
 
-const port: number = 3000
+import router from './router'
+
+import {gameConfig, playerConfig} from '../../webpack.config.js'
 
 const run = function() {
   const app = express()
@@ -36,30 +38,46 @@ const run = function() {
   app.set('views', path.join(__dirname, 'views'))
 
   // set up router
-  router.init(app)
+  router.init(app, getLocalIp())
 
   // start server
-  app.listen(port, (err) => {
+  app.listen(config.serverPort, (err) => {
     if (err) {
       return console.log('server failed to start:', err)
     }
 
-    console.log(`server is listening on ${port}`)
+    console.log(`server is listening on ${config.serverPort}`)
   })
 
   configureSockets(io)
-  socketServer.listen(port + 1)
+  socketServer.listen(config.websocketPort)
 }
 
-const configureSockets = function(io) {
+const configureSockets = (io) => {
   io.sockets.on('connection', (socket) => {
     socket.on(SocketCommands.joinRoom, (room) => {
       socket.join(room)
+
+      socket.emit(SocketCommands.setPlayerColor, Colors.teal)
     })
   })
 }
 
+const getLocalIp: () => string = () => {
+  let address = ''
+  const ifaces = os.networkInterfaces()
+
+  for (const dev in ifaces) {
+    const iface = ifaces[dev].filter((details) => {
+        return details.family === 'IPv4' && details.internal === false
+    });
+
+    if (iface.length > 0) address = iface[0].address
+  }
+
+  return address
+}
+
 module.exports = {
-  port: port,
-  run: run
+  run
 }
