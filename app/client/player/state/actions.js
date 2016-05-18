@@ -9,3 +9,12 @@ export class SetPlayerColorAction extends Action {
     this.color = color
   }
 }
+
+export class SetPlayerNameAction extends Action {
+  name: string;
+
+  constructor(name: string) {
+    super()
+    this.name = name
+  }
+}

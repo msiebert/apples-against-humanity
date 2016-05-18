@@ -1,3 +1,0 @@
-declare interface StateProps<A> {
-  state: StateMachine<A>;
-}

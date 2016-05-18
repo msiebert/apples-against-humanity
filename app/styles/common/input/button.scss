@@ -1,0 +1,21 @@
+@import "~styles/colors.scss";
+
+.btn {
+  border: none;
+  padding: 8px 20px;
+
+  font-size: 18px;
+
+  transition: box-shadow .5s;
+
+  @include drop-shadow-1;
+
+  &:hover {
+    @include drop-shadow-2;
+  }
+}
+
+.btn-teal {
+  background-color: $teal;
+  color: white;
+}

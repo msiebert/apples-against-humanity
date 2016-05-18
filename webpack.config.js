@@ -15,6 +15,7 @@ function genConfig(name: string): Object {
     resolve: {
       root: path.resolve(__dirname),
       alias: {
+        client: 'app/client',
         common: 'app/common',
         game: 'app/client/game',
         player: 'app/client/player',

@@ -12,6 +12,7 @@ module.name_mapper='^.*\(\.scss\)$' -> 'CSSModule'
 module.system=haste
 
 # set up better imports
+module.name_mapper='^client\/\(.*\)$' -> '<PROJECT_ROOT>/app/client/\1'
 module.name_mapper='^common\/\(.*\)$' -> '<PROJECT_ROOT>/app/common/\1'
 module.name_mapper='^game\/\(.*\)$' -> '<PROJECT_ROOT>/app/client/game/\1'
 module.name_mapper='^player\/\(.*\)$' -> '<PROJECT_ROOT>/app/client/player/\1'

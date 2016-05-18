@@ -11,7 +11,7 @@ import webpackMiddleware from 'webpack-dev-middleware'
 
 import Colors from '../common/colors'
 import * as config from '../common/config'
-import SocketCommands from '../common/socketcommands'
+import SocketCommands, {LoginPlayerData} from '../common/socketcommands'
 
 import router from './router'
 
@@ -59,6 +59,10 @@ const configureSockets = (io) => {
       socket.join(room)
 
       socket.emit(SocketCommands.setPlayerColor, Colors.teal)
+
+      socket.on(SocketCommands.loginPlayer, (data: LoginPlayerData) => {
+        io.to(data.room).emit(SocketCommands.loginPlayer, data)
+      })
     })
   })
 }

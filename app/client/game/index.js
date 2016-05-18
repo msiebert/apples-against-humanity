@@ -5,7 +5,7 @@ import ReactDOM from 'react-dom'
 import io from 'socket.io-client'
 
 import * as config from '../../common/config'
-import SocketCommands from '../../common/socketcommands'
+import SocketCommands, {LoginPlayerData} from '../../common/socketcommands'
 import HelloWorld from './HelloWorld.jsx'
 
 import StateMachine from '../../common/state/statemachine'
@@ -21,6 +21,10 @@ socket.on('connect', () => {
 
 socket.on(SocketCommands.addPlayer, (name) => {
   state.dispatch(new AddPlayerAction(name))
+})
+
+socket.on(SocketCommands.loginPlayer, (data: LoginPlayerData) => {
+  console.log(data)
 })
 
 ReactDOM.render(

@@ -1,0 +1,14 @@
+@import "~styles/colors.scss";
+
+input[type=text] {
+  $focus-transition-time: .5s;
+
+  padding: 8px;
+  border: #bbb solid 1px;
+
+  font-size: 18px;
+
+  &.text-teal {
+    @include focus-glow(transparentize($teal, .5), $focus-transition-time);
+  }
+}
