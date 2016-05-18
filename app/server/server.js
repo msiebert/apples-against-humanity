@@ -58,13 +58,20 @@ const configureSockets = (io) => {
     socket.on(SocketCommands.joinRoom, (room) => {
       socket.join(room)
 
-      socket.emit(SocketCommands.setPlayerColor, Colors.teal)
+      socket.emit(SocketCommands.setPlayerColor, getRandomColor())
 
       socket.on(SocketCommands.loginPlayer, (data: LoginPlayerData) => {
         io.to(data.room).emit(SocketCommands.loginPlayer, data)
       })
     })
   })
+}
+
+const getRandomColor = () => {
+  const keys = Object.keys(Colors)
+  keys.splice(keys.indexOf('none'), 1)
+  const index = Math.floor(Math.random() * 1000) % (keys.length)
+  return Colors[keys[index]]
 }
 
 const getLocalIp: () => string = () => {
