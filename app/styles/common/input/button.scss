@@ -4,6 +4,8 @@
   border: none;
   padding: 8px 20px;
 
+  color: white;
+  cursor: pointer;
   font-size: 18px;
 
   transition: box-shadow .5s;
@@ -15,7 +17,78 @@
   }
 }
 
+.btn-amber {
+  background-color: $amber;
+}
+
+.btn-blue {
+  background-color: $blue;
+}
+
+.btn-blue-gray {
+  background-color: $blue-gray;
+}
+
+.btn-brown {
+  background-color: $brown;
+}
+
+.btn-cyan {
+  background-color: $cyan;
+}
+
+.btn-deep-orange {
+  background-color: $deep-orange;
+}
+
+.btn-deep-purple {
+  background-color: $deep-purple;
+}
+
+.btn-gray {
+  background-color: $gray;
+}
+
+.btn-green {
+  background-color: $green;
+}
+
+.btn-indigo {
+  background-color: $indigo;
+}
+
+.btn-light-blue {
+  background-color: $light-blue;
+}
+
+.btn-light-green {
+  background-color: $light-green;
+}
+
+.btn-lime {
+  background-color: $lime;
+}
+
+.btn-orange {
+  background-color: $orange;
+}
+
+.btn-pink {
+  background-color: $pink;
+}
+
+.btn-purple {
+  background-color: $purple;
+}
+
+.btn-red {
+  background-color: $red;
+}
+
 .btn-teal {
   background-color: $teal;
-  color: white;
+}
+
+.btn-yellow {
+  background-color: $yellow;
 }

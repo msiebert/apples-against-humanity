@@ -4,30 +4,21 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import io from 'socket.io-client'
 
-import * as config from '../../common/config'
-import SocketCommands, {LoginPlayerData} from '../../common/socketcommands'
-import HelloWorld from './HelloWorld.jsx'
+import StateMachine from 'common/state/statemachine'
 
-import StateMachine from '../../common/state/statemachine'
-import {gameTransition, initialState} from './state/transitions'
-import {AddPlayerAction} from './state/actions'
+import GameContainer from 'game/components/GameContainer.jsx'
+import Socket from 'game/socket'
+import {gameTransition, initialState} from 'game/state/transitions'
 
-const state = new StateMachine(gameTransition, initialState)
+import styles from 'styles/game/game.scss'
 
-const socket = io.connect(websocketAddress)
-socket.on('connect', () => {
-  socket.emit(SocketCommands.joinRoom, config.gameEventsRoom)
-})
+const stateMachine = new StateMachine(gameTransition, initialState)
 
-socket.on(SocketCommands.addPlayer, (name) => {
-  state.dispatch(new AddPlayerAction(name))
-})
-
-socket.on(SocketCommands.loginPlayer, (data: LoginPlayerData) => {
-  console.log(data)
-})
+const socket = new Socket(io.connect(websocketAddress), stateMachine)
 
 ReactDOM.render(
-  React.createElement(HelloWorld, null),
+  React.createElement(GameContainer, {stateMachine, socket}),
   document.getElementById('root')
 )
+
+socket.init()

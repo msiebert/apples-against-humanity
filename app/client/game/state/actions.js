@@ -2,11 +2,11 @@
 import Player from '../../../common/models/player'
 import Action from '../../../common/state/action'
 
-export class AddPlayerAction extends Action {
+export class LoginPlayerAction extends Action {
   player: Player;
 
-  constructor(name: string) {
+  constructor(name: string, color: string) {
     super()
-    this.player = new Player(name)
+    this.player = new Player(name, color)
   }
 }

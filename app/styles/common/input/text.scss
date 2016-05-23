@@ -8,7 +8,79 @@ input[type=text] {
 
   font-size: 18px;
 
+  &.text-red {
+    @include focus-glow(transparentize($red, .5), $focus-transition-time);
+  }
+
+  &.text-pink {
+    @include focus-glow(transparentize($pink, .5), $focus-transition-time);
+  }
+
+  &.text-purple {
+    @include focus-glow(transparentize($purple, .5), $focus-transition-time);
+  }
+
+  &.text-deep-purple {
+    @include focus-glow(transparentize($deep-purple, .5), $focus-transition-time);
+  }
+
+  &.text-indigo {
+    @include focus-glow(transparentize($indigo, .5), $focus-transition-time);
+  }
+
+  &.text-blue {
+    @include focus-glow(transparentize($blue, .5), $focus-transition-time);
+  }
+
+  &.text-light-blue {
+    @include focus-glow(transparentize($light-blue, .5), $focus-transition-time);
+  }
+
+  &.text-cyan {
+    @include focus-glow(transparentize($cyan, .5), $focus-transition-time);
+  }
+
   &.text-teal {
     @include focus-glow(transparentize($teal, .5), $focus-transition-time);
+  }
+
+  &.text-green {
+    @include focus-glow(transparentize($green, .5), $focus-transition-time);
+  }
+
+  &.text-light-green {
+    @include focus-glow(transparentize($light-green, .5), $focus-transition-time);
+  }
+
+  &.text-lime {
+    @include focus-glow(transparentize($lime, .5), $focus-transition-time);
+  }
+
+  &.text-yellow {
+    @include focus-glow(transparentize($yellow, .5), $focus-transition-time);
+  }
+
+  &.text-amber {
+    @include focus-glow(transparentize($amber, .5), $focus-transition-time);
+  }
+
+  &.text-orange {
+    @include focus-glow(transparentize($orange, .5), $focus-transition-time);
+  }
+
+  &.text-deep-orange {
+    @include focus-glow(transparentize($deep-orange, .5), $focus-transition-time);
+  }
+
+  &.text-brown {
+    @include focus-glow(transparentize($brown, .5), $focus-transition-time);
+  }
+
+  &.text-gray {
+    @include focus-glow(transparentize($gray, .5), $focus-transition-time);
+  }
+
+  &.text-blue-gray {
+    @include focus-glow(transparentize($blue-gray, .5), $focus-transition-time);
   }
 }

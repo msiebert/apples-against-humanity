@@ -7,6 +7,7 @@ type Props = {
   color: string,
   text: string,
   onClick: () => void,
+  className?: string,
 };
 
 export default class Button extends Component {
@@ -14,7 +15,8 @@ export default class Button extends Component {
 
   render() {
     return (
-      <button className={`btn btn-${this.props.color}`} onClick={this.props.onClick}>
+      <button className={`btn btn-${this.props.color} ${this.props.className}`}
+        onClick={this.props.onClick}>
         {this.props.text}
       </button>
     )
