@@ -14,10 +14,12 @@ export default class Button extends Component {
   props: Props;
 
   render() {
+    const {color, text, onClick, className} = this.props
+    const additional = className || ''
+
     return (
-      <button className={`btn btn-${this.props.color} ${this.props.className}`}
-        onClick={this.props.onClick}>
-        {this.props.text}
+      <button className={`btn btn-${color} ${additional}`} onClick={onClick}>
+        {text}
       </button>
     )
   }

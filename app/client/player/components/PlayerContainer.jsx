@@ -1,12 +1,14 @@
 // @flow
 import React, {Component} from 'react'
 
-import Player from 'common/models/player'
+import Player, {PlayerStatus} from 'common/models/player'
 import StateMachine from 'common/state/statemachine'
 
+import Header from 'player/components/Header.jsx'
 import Login from 'player/components/Login.jsx'
 import Socket from 'player/socket'
 import {SetPlayerNameAction} from 'player/state/actions'
+import Waiting from 'player/components/Waiting.jsx'
 
 import PlayerColors from 'styles/player/player-colors.scss'
 
@@ -42,9 +44,23 @@ export default class PlayerContainer extends Component {
   render() {
     const color = this.state && this.state.player.color || ''
 
+    let child = null
+    if (this.state.player.status == PlayerStatus.loggingIn) {
+      child = <Login key='player-login' color={color}
+        onLogin={this.onLogin.bind(this)} />
+    } else {
+      child = <Waiting key='player-waiting' />
+    }
+
+    let header = null
+    if (this.state.player.name != '') {
+      header = <Header title={this.state.player.name} />
+    }
+
     return(
       <div className={`${color} player-root`}>
-        <Login color={color} onLogin={this.onLogin.bind(this)} />
+        {header}
+        {child}
       </div>
     )
   }

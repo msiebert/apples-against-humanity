@@ -8,10 +8,17 @@ export default class Player {
   name: string;
   color: string;
   cards: Set<Card>;
+  status: string;
 
-  constructor(name: ?string, color: ?string, cards: ?Set<Card>) {
+  constructor(name: ?string, color: ?string, cards: ?Set<Card>, status: ?string) {
     this.name = name || ''
     this.color = color || Colors.none
     this.cards = cards || Set()
+    this.status = status || PlayerStatus.loggingIn
   }
+}
+
+export const PlayerStatus = {
+  loggingIn: 'logging in',
+  waiting: 'waiting',
 }
