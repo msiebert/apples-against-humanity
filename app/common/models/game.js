@@ -8,14 +8,17 @@ export default class Game {
   players: List<Player>;
   unusedCards: Set<Card>;
   currentJudge: ?Player;
+  serverAddress: string;
 
   constructor(
       players: ?List<Player>,
       unusedCards: ?Set<Card>,
-      currentJudge: ?Player
+      currentJudge: ?Player,
+      serverAddress: ?string
   ) {
     this.players = players || List()
     this.unusedCards = unusedCards || Set()
     this.currentJudge = currentJudge
+    this.serverAddress = serverAddress || ''
   }
 }

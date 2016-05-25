@@ -10,3 +10,12 @@ export class LoginPlayerAction extends Action {
     this.player = new Player(name, color)
   }
 }
+
+export class SetServerAddressAction extends Action {
+  address: string;
+
+  constructor(address: string) {
+    super()
+    this.address = address
+  }
+}

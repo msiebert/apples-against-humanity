@@ -9,6 +9,15 @@
     text-align: center;
   }
 
+  .start-screen-address {
+    color: $font-color-light;
+    text-align: center;
+
+    .address {
+      color: $blue;
+    }
+  }
+
   .waiting-message {
     margin: 0;
 

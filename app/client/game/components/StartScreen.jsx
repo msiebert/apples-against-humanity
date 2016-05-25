@@ -14,12 +14,14 @@ import grid from 'styles/grid.scss'
 type Props = {
   players: List<Player>,
   onStart: () => void,
+  address: string,
 };
 export default class StartScreen extends Component {
   props: Props;
 
   render() {
-    const playerRows = this.props.players
+    const {players, onStart, address} = this.props
+    const playerRows = players
       .groupBy((value: Player, index: number) => Math.floor(index / 3))
       .toList()
       .map((players: List<Player>, index: number) => {
@@ -34,15 +36,18 @@ export default class StartScreen extends Component {
     let startElement = <p key="waiting-message" className="waiting-message">
       waiting for more players
     </p>
-    if (this.props.players.size >= 3) {
+    if (players.size >= 3) {
       startElement = <Button className="start-button" color="blue" text="Start!"
-        onClick={this.props.onStart} />
+        onClick={onStart} />
     }
 
     return (
       <div className="start-screen">
         <h1 className="start-screen-title">Apples against Humanity</h1>
         {startElement}
+        <h4 className="start-screen-address">
+          go to <span className="address">{address}</span> to play
+        </h4>
         <div className="player-blocks">
           {playerRows}
         </div>

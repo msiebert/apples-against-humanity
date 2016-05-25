@@ -31,6 +31,7 @@ export default class GameContainer extends Component {
     return(
       <div className="game-root">
         <StartScreen players={this.state.game.players}
+          address={this.state.game.serverAddress}
           onStart={this.onStart.bind(this)} />
       </div>
     )
