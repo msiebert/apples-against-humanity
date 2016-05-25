@@ -39,13 +39,20 @@ export default class Login extends Component {
     }
   }
 
+  onEnterKey(event: SyntheticEvent): void {
+    if (event.key == 'Enter') {
+      this.onLogin()
+    }
+  }
+
   render() {
     return (
       <div className="player-login">
         <h1>Enter Your Name</h1>
         <Text color={this.props.color} placeholder="name"
-          onChange={this.onTextEntered.bind(this)} value={this.state.name} />
-        <Button color={this.props.color} text="Go!" onClick={this.onLogin} />
+          onChange={this.onTextEntered.bind(this)} value={this.state.name}
+          onKeyUp={this.onEnterKey.bind(this)} />
+        <Button color={this.props.color} text="Go!" onClick={this.onLogin } />
       </div>
     )
   }
