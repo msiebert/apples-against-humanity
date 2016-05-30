@@ -1,0 +1,61 @@
+@import '~styles/colors.scss';
+
+.checkbox {
+  $checkbox-dimensions: 30px;
+
+  margin: 20px;
+
+  cursor: pointer;
+
+  .text {
+    color: $font-color-dark;
+    font-size: 20px;
+    line-height: $checkbox-dimensions;
+  }
+
+  .box {
+    display: inline-block;
+    position: relative;
+
+    border-radius: 2px;
+    height: $checkbox-dimensions;
+    width: $checkbox-dimensions;
+    margin-right: 10px;
+  }
+
+  &.checked {
+    .box {
+      background-color: $teal;
+
+      &::after {
+        position: absolute;
+        left: 3px;
+        top: -2px;
+
+        color: white;
+        content: '✓';
+        font-size: $checkbox-dimensions;
+      }
+    }
+  }
+
+  &.unchecked {
+    .box {
+      border: 4px solid $font-color-light;
+    }
+  }
+
+  &:hover {
+    &.checked .box {
+      background-color: lighten($teal, 10%);
+    }
+
+    &.unchecked .box {
+      border-color: lighten($font-color-light, 10%);
+    }
+
+    .text {
+      color: $font-color-light;
+    }
+  }
+}

@@ -1,0 +1,15 @@
+@import '~styles/colors.scss';
+
+.content-selection {
+  h1 {
+    margin: 0;
+
+    color: $font-color-dark;
+    text-align: center;
+  }
+
+  .confirm-selection {
+    display: block;
+    margin: 20px auto;
+  }
+}

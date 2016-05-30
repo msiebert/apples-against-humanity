@@ -1,6 +1,8 @@
 // @flow
-import Player from '../../../common/models/player'
-import Action from '../../../common/state/action'
+import {List, Set} from 'immutable'
+
+import Player from 'common/models/player'
+import Action from 'common/state/action'
 
 export class LoginPlayerAction extends Action {
   player: Player;
@@ -17,5 +19,19 @@ export class SetServerAddressAction extends Action {
   constructor(address: string) {
     super()
     this.address = address
+  }
+}
+
+export class StartSelectingContentAction extends Action {
+}
+
+export class AddContentAction extends Action {
+  cards: Set<string>;
+  prompts: Set<string>;
+
+  constructor(cards: Set<string>, prompts: Set<string>) {
+    super()
+    this.cards = cards
+    this.prompts = prompts
   }
 }

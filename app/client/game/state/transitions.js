@@ -1,6 +1,6 @@
 // @flow
 
-import Game from 'common/models/game'
+import Game, {GameStatus} from 'common/models/game'
 import Action from 'common/state/action'
 import * as actions from 'game/state/actions'
 
@@ -12,19 +12,16 @@ export const gameTransition: GameTransitionFunction = (
     action: Action
 ) => {
   if (action instanceof actions.LoginPlayerAction) {
-    return new Game(
-      game.players.push(action.player),
-      game.unusedCards,
-      game.currentJudge,
-      game.serverAddress
-    )
+    return game.copy({players: game.players.push(action.player)})
   } else if (action instanceof actions.SetServerAddressAction) {
-    return new Game(
-      game.players,
-      game.unusedCards,
-      game.currentJudge,
-      action.address
-    )
+    return game.copy({serverAddress: action.address})
+  } else if (action instanceof actions.StartSelectingContentAction) {
+    return game.copy({status: GameStatus.selectingContent})
+  } else if (action instanceof actions.AddContentAction) {
+    return game.copy({
+      unusedCards: game.unusedCards.union(action.cards),
+      unusedPrompts: game.unusedPrompts.union(action.prompts),
+    })
   } else {
     return game
   }
