@@ -11,7 +11,8 @@ import webpackMiddleware from 'webpack-dev-middleware'
 
 import Colors from '../common/colors'
 import * as config from '../common/config'
-import SocketCommands, {LoginPlayerData} from '../common/socketcommands'
+import SocketCommands from '../common/socketcommands'
+import * as socketData from '../common/socketcommands'
 
 import router from './router'
 
@@ -60,9 +61,19 @@ const configureSockets = (io) => {
 
       socket.emit(SocketCommands.setPlayerColor, getRandomColor())
 
-      socket.on(SocketCommands.loginPlayer, (data: LoginPlayerData) => {
-        io.to(data.room).emit(SocketCommands.loginPlayer, data)
-      })
+      socket.on(
+        SocketCommands.loginPlayer,
+        (data: socketData.LoginPlayerData): void => {
+          io.to(data.room).emit(SocketCommands.loginPlayer, data)
+        }
+      )
+
+      socket.on(
+        SocketCommands.givePlayerCard,
+        (data: socketData.GivePlayerCardData): void => {
+          io.to(data.room).emit(SocketCommands.givePlayerCard, data)
+        }
+      )
     })
   })
 }

@@ -1,4 +1,6 @@
 // @flow
+import * as commonActions from 'client/common/state/actions'
+
 import Action from 'common/state/action'
 import Player, {PlayerStatus} from 'common/models/player'
 
@@ -12,9 +14,15 @@ export const playerTransition: TransitionFunction = (
   action: Action
 ) => {
   if (action instanceof actions.SetPlayerColorAction) {
-    return new Player(player.name, action.color, player.cards)
+    return player.copy({color: action.color})
   } else if (action instanceof actions.SetPlayerNameAction) {
-    return new Player(action.name, player.color, player.cards, PlayerStatus.waiting)
+    return player.copy({name: action.name, status: PlayerStatus.waiting})
+  } else if (action instanceof commonActions.GivePlayerCardAction) {
+    if (action.playerName == player.name) {
+      return player.copy({cards: player.cards.add(action.card)})
+    } else {
+      return player
+    }
   } else {
     return player
   }

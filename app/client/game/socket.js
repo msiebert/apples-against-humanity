@@ -24,4 +24,12 @@ export default class Socket {
       this.state.dispatch(new LoginPlayerAction(data.name, data.color))
     })
   }
+
+  givePlayerCard(name: string, card: string): void {
+    this.socket.emit(SocketCommands.givePlayerCard, {
+      name,
+      card,
+      room: config.playerEventsRoom
+    })
+  }
 }

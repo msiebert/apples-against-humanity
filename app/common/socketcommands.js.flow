@@ -3,3 +3,9 @@ export type LoginPlayerData = {
   color: string,
   room: string,
 };
+
+export type GivePlayerCardData = {
+  name: string,
+  card: string,
+  room: string
+};

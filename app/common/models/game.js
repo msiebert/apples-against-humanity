@@ -37,7 +37,7 @@ export default class Game extends GameProperties {
     currentJudge,
     serverAddress,
     status
-  }: $Shape<GameProperties>) {
+  }: $Shape<GameProperties>): Game {
     return new Game(
       players || this.players,
       unusedCards || this.unusedCards,
