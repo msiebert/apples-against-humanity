@@ -27,7 +27,7 @@ export default class Game extends GameProperties {
     this.players = players || List()
     this.unusedCards = unusedCards || Set()
     this.unusedPrompts = unusedPrompts || Set()
-    this.currentJudge = currentJudge || -1
+    this.currentJudge = (currentJudge != undefined) ? currentJudge : -1
     this.serverAddress = serverAddress || ''
     this.status = status || GameStatus.start
     this.currentPrompt = currentPrompt || ''
@@ -46,7 +46,7 @@ export default class Game extends GameProperties {
       players || this.players,
       unusedCards || this.unusedCards,
       unusedPrompts || this.unusedPrompts,
-      currentJudge || this.currentJudge,
+      (currentJudge != undefined) ? currentJudge : this.currentJudge,
       serverAddress || this.serverAddress,
       status || this.status,
       currentPrompt || this.currentPrompt

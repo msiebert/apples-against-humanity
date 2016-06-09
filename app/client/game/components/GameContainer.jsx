@@ -91,8 +91,8 @@ export default class GameContainer extends Component {
   }
 
   startTurn(): void {
-    const {game} = this.state
     this.props.stateMachine.dispatch(new actions.StartTurnAction())
+    const {game} = this.state
     this.props.socket.setJudge(game.players.get(game.currentJudge).name)
     this.props.socket.startTurn()
   }

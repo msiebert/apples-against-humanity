@@ -9,6 +9,7 @@ import Login from 'player/components/Login.jsx'
 import Socket from 'player/socket'
 import {SetPlayerNameAction} from 'player/state/actions'
 import Waiting from 'player/components/Waiting.jsx'
+import WaitingJudge from 'player/components/WaitingJudge.jsx'
 
 import PlayerColors from 'styles/player/player-colors.scss'
 
@@ -48,6 +49,8 @@ export default class PlayerContainer extends Component {
     if (this.state.player.status == PlayerStatus.loggingIn) {
       child = <Login key='player-login' color={color}
         onLogin={this.onLogin.bind(this)} />
+    } else if (this.state.player.status == PlayerStatus.waitingJudge) {
+      child = <WaitingJudge />
     } else {
       child = <Waiting key='player-waiting' />
     }
