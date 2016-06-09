@@ -4,7 +4,7 @@ import {List} from 'immutable'
 import * as commonActions from 'client/common/state/actions'
 
 import Game, {GameStatus} from 'common/models/game'
-import Player from 'common/models/player'
+import Player, {PlayerStatus} from 'common/models/player'
 import Action from 'common/state/action'
 
 import * as actions from 'game/state/actions'
@@ -40,6 +40,23 @@ export const gameTransition: GameTransitionFunction = (
     return game.copy({
       unusedCards: unusedCards,
       players: players
+    })
+  } else if (action instanceof actions.StartTurnAction) {
+    const nextJudgeIndex = (game.currentJudge + 1) % game.players.size
+    const unusedPrompts = game.unusedPrompts.toList()
+    const nextPrompt = unusedPrompts.get(Math.random() * unusedPrompts.size)
+    return game.copy({
+      currentJudge: nextJudgeIndex,
+      status: GameStatus.submittingCards,
+      unusedPrompts: game.unusedPrompts.delete(nextPrompt),
+      currentPrompt: nextPrompt,
+      players: game.players.map((player: Player, index: number): Player => {
+        return player.copy({
+          status: index == nextJudgeIndex ?
+            PlayerStatus.waitingJudge : PlayerStatus.pickingCard,
+          isJudging: index == nextJudgeIndex,
+        })
+      })
     })
   } else {
     return game

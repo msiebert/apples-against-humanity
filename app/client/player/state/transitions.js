@@ -23,6 +23,17 @@ export const playerTransition: TransitionFunction = (
     } else {
       return player
     }
+  } else if (action instanceof commonActions.SetJudgeAction) {
+    if (action.playerName == player.name) {
+      return player.copy({isJudging: true})
+    } else {
+      return player.copy({isJudging: false})
+    }
+  } else if (action instanceof actions.StartTurnAction) {
+    return player.copy({
+      status: player.isJudging ?
+        PlayerStatus.waitingJudge : PlayerStatus.pickingCard,
+    })
   } else {
     return player
   }

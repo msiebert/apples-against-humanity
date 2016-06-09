@@ -11,3 +11,12 @@ export class GivePlayerCardAction extends Action {
     this.card = card
   }
 }
+
+export class SetJudgeAction extends Action {
+  playerName: string;
+
+  constructor(playerName: string) {
+    super()
+    this.playerName = playerName
+  }
+}

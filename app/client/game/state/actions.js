@@ -22,8 +22,7 @@ export class SetServerAddressAction extends Action {
   }
 }
 
-export class StartSelectingContentAction extends Action {
-}
+export class StartSelectingContentAction extends Action {}
 
 export class AddContentAction extends Action {
   cards: Set<string>;
@@ -35,3 +34,5 @@ export class AddContentAction extends Action {
     this.prompts = prompts
   }
 }
+
+export class StartTurnAction extends Action {}

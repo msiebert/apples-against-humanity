@@ -11,6 +11,7 @@ import StateMachine from 'common/state/statemachine'
 
 import ContentSelection from 'game/components/ContentSelection.jsx'
 import StartScreen from 'game/components/StartScreen.jsx'
+import SubmittingCards from 'game/components/SubmittingCards.jsx'
 import Socket from 'game/socket'
 import * as actions from 'game/state/actions'
 
@@ -44,7 +45,16 @@ export default class GameContainer extends Component {
         address={game.serverAddress} onStart={this.onStart.bind(this)} />
     } else if (game.status == GameStatus.selectingContent) {
       child = <ContentSelection key="game-content-selection"
-        loadContentPack={this.loadContentPack.bind(this)} />
+        loadContentPacks={this.loadContentPacks.bind(this)} />
+    } else if (game.status == GameStatus.submittingCards) {
+      const players = game.players.filterNot((p: Player): boolean => {
+        return p.isJudging
+      })
+      const judge = game.players.filter((p: Player): boolean => {
+        return p.isJudging
+      }).get(0)
+      child = <SubmittingCards key="game-submitting-cards"
+        prompt={game.currentPrompt} players={players} judge={judge} />
     }
 
     return (
@@ -58,9 +68,10 @@ export default class GameContainer extends Component {
     this.props.stateMachine.dispatch(new actions.StartSelectingContentAction())
   }
 
-  loadContentPack(cards: Set<string>, prompts: Set<string>): void {
+  loadContentPacks(cards: Set<string>, prompts: Set<string>): void {
     this.props.stateMachine.dispatch(new actions.AddContentAction(cards, prompts))
     this.givePlayersCards()
+    this.startTurn()
   }
 
   givePlayersCards(): void {
@@ -77,5 +88,12 @@ export default class GameContainer extends Component {
         }
       }
     })
+  }
+
+  startTurn(): void {
+    const {game} = this.state
+    this.props.stateMachine.dispatch(new actions.StartTurnAction())
+    this.props.socket.setJudge(game.players.get(game.currentJudge).name)
+    this.props.socket.startTurn()
   }
 }

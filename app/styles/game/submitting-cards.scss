@@ -1,0 +1,24 @@
+@import '~styles/colors';
+
+.submitting-cards {
+  .prompt {
+    margin-top: 0;
+
+    color: $font-color-dark;
+    text-align: center;
+  }
+
+  .judge {
+    color: $font-color-light;
+    text-align: center;
+  }
+
+  .player-block {
+    opacity: 1;
+    transition: opacity ease .75s;
+
+    &.still-picking {
+      opacity: .2;
+    }
+  }
+}

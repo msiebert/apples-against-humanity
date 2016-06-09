@@ -9,3 +9,12 @@ export type GivePlayerCardData = {
   card: string,
   room: string
 };
+
+export type SetJudgeData = {
+  name: string,
+  room: string,
+};
+
+export type DefaultData = {
+  room: string,
+};

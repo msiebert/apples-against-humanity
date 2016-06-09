@@ -74,6 +74,20 @@ const configureSockets = (io) => {
           io.to(data.room).emit(SocketCommands.givePlayerCard, data)
         }
       )
+
+      socket.on(
+        SocketCommands.setJudge,
+        (data: socketData.SetJudgeData): void => {
+          io.to(data.room).emit(SocketCommands.setJudge, data)
+        }
+      )
+
+      socket.on(
+        SocketCommands.startTurn,
+        (data: socketData.DefaultData): void => {
+          io.to(data.room).emit(SocketCommands.startTurn)
+        }
+      )
     })
   })
 }

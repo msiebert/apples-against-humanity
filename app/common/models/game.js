@@ -7,9 +7,10 @@ class GameProperties {
   players: List<Player>;
   unusedCards: Set<string>;
   unusedPrompts: Set<string>;
-  currentJudge: ?Player;
+  currentJudge: number;
   serverAddress: string;
   status: string;
+  currentPrompt: string;
 }
 
 export default class Game extends GameProperties {
@@ -17,17 +18,19 @@ export default class Game extends GameProperties {
       players: ?List<Player>,
       unusedCards: ?Set<string>,
       unusedPrompts: ?Set<string>,
-      currentJudge: ?Player,
+      currentJudge: ?number,
       serverAddress: ?string,
-      status: ?string
+      status: ?string,
+      currentPrompt: ?string
   ) {
     super()
     this.players = players || List()
     this.unusedCards = unusedCards || Set()
     this.unusedPrompts = unusedPrompts || Set()
-    this.currentJudge = currentJudge
+    this.currentJudge = currentJudge || -1
     this.serverAddress = serverAddress || ''
     this.status = status || GameStatus.start
+    this.currentPrompt = currentPrompt || ''
   }
 
   copy({
@@ -36,7 +39,8 @@ export default class Game extends GameProperties {
     unusedPrompts,
     currentJudge,
     serverAddress,
-    status
+    status,
+    currentPrompt
   }: $Shape<GameProperties>): Game {
     return new Game(
       players || this.players,
@@ -44,7 +48,8 @@ export default class Game extends GameProperties {
       unusedPrompts || this.unusedPrompts,
       currentJudge || this.currentJudge,
       serverAddress || this.serverAddress,
-      status || this.status
+      status || this.status,
+      currentPrompt || this.currentPrompt
     )
   }
 }
@@ -52,4 +57,5 @@ export default class Game extends GameProperties {
 export const GameStatus = {
   start: 'start',
   selectingContent: 'selecting content',
+  submittingCards: 'submitting cards',
 }

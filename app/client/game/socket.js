@@ -32,4 +32,17 @@ export default class Socket {
       room: config.playerEventsRoom
     })
   }
+
+  setJudge(name: string): void {
+    this.socket.emit(SocketCommands.setJudge, {
+      name,
+      room: config.playerEventsRoom,
+    })
+  }
+
+  startTurn(): void {
+    this.socket.emit(SocketCommands.startTurn, {
+      room: config.playerEventsRoom,
+    })
+  }
 }

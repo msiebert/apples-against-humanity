@@ -7,7 +7,7 @@ import SocketCommands from 'common/socketcommands'
 import * as socketData from 'common/socketcommands'
 import StateMachine from 'common/state/statemachine'
 
-import {SetPlayerColorAction} from 'player/state/actions'
+import * as actions from 'player/state/actions'
 
 export default class Socket {
   socket: SocketIO;
@@ -25,7 +25,7 @@ export default class Socket {
     })
 
     this.socket.on(SocketCommands.setPlayerColor, (color: string) => {
-      this.state.dispatch(new SetPlayerColorAction(color))
+      this.state.dispatch(new actions.SetPlayerColorAction(color))
     })
 
     this.socket.on(
@@ -35,7 +35,18 @@ export default class Socket {
           new commonActions.GivePlayerCardAction(data.name, data.card)
         )
       }
+    )
 
+    this.socket.on(
+      SocketCommands.setJudge,
+      (data: socketData.SetJudgeData): void => {
+        this.state.dispatch(new commonActions.SetJudgeAction(data.name))
+      }
+    )
+
+    this.socket.on(
+      SocketCommands.startTurn,
+      (): void => { this.state.dispatch(new actions.StartTurnAction()) }
     )
   }
 

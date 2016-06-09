@@ -1,5 +1,5 @@
 // @flow
-import {Map, Set} from 'immutable';
+import {Map, Set} from 'immutable'
 import React, {Component} from 'react'
 
 import * as ajax from 'client/common/ajax'
@@ -21,7 +21,7 @@ type State = {
   packs: Map<string, CheckboxState>,
 };
 type Props = {
-  loadContentPack: (cards: Set<string>, prompts: Set<string>) => void,
+  loadContentPacks: (cards: Set<string>, prompts: Set<string>) => void,
 };
 export default class ContentSelection extends Component {
   props: Props;
@@ -78,7 +78,7 @@ export default class ContentSelection extends Component {
         }
       }, {cards: Set(), prompts: Set()})
 
-      this.props.loadContentPack(cards, prompts)
+      this.props.loadContentPacks(cards, prompts)
     })
   }
 

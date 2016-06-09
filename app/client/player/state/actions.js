@@ -18,3 +18,5 @@ export class SetPlayerNameAction extends Action {
     this.name = name
   }
 }
+
+export class StartTurnAction extends Action { }
