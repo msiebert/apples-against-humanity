@@ -8,6 +8,7 @@ import path from 'path'
 import socketIO from 'socket.io'
 import webpack from 'webpack'
 import webpackMiddleware from 'webpack-dev-middleware'
+import webpackHotMiddleware from 'webpack-hot-middleware'
 
 import Colors from '../common/colors'
 import * as config from '../common/config'
@@ -26,8 +27,25 @@ const run = function() {
   const gameClientCompiler = webpack(gameConfig)
   const playerClientCompiler = webpack(playerConfig)
 
-  app.use('/', webpackMiddleware(gameClientCompiler))
-  app.use('/', webpackMiddleware(playerClientCompiler))
+  app.use(webpackMiddleware(gameClientCompiler, {
+    noInfo: true,
+    hot: true,
+    publicPath: gameConfig.output.publicPath
+  }))
+  app.use(webpackHotMiddleware(gameClientCompiler, {
+    hot: true,
+    inline: true,
+    path: '/game/hot',
+  }))
+  app.use(webpackMiddleware(playerClientCompiler, {
+    noInfo: true,
+    publicPath: playerConfig.output.publicPath
+  }))
+  app.use(webpackHotMiddleware(playerClientCompiler, {
+    hot: true,
+    inline: true,
+    path: '/player/hot',
+  }))
 
   // set up handlebars
   app.engine('.hbs', expressHandlebars({

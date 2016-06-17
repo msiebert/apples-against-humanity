@@ -2,11 +2,18 @@ import path from 'path'
 import ExtractTextPlugin from 'extract-text-webpack-plugin'
 import atImport from 'postcss-import'
 import autoprefixer from 'autoprefixer'
+import webpack from 'webpack'
+import FlowStatusWebpackPlugin from 'flow-status-webpack-plugin'
 
 function genConfig(name: string): Object {
   return {
     devtool: 'eval-source-map',
-    entry: path.join(__dirname, `app/client/${name}/index.js`),
+    entry: [
+      'react-hot-loader/patch',
+      path.join(__dirname, `app/client/${name}/index.js`),
+      `webpack-hot-middleware/client?reload=false&path=/${name}/hot`,
+      'webpack/hot/dev-server',
+    ],
     output: {
       path: path.resolve('./dist'),
       filename: `${name}.js`,
@@ -52,6 +59,12 @@ function genConfig(name: string): Object {
     },
     plugins: [
       new ExtractTextPlugin(`${name}.css`),
+      new webpack.optimize.OccurrenceOrderPlugin(),
+      new webpack.HotModuleReplacementPlugin(),
+      new webpack.NoErrorsPlugin(),
+      new FlowStatusWebpackPlugin({
+        restartFlow: false,
+      })
     ],
   }
 }
