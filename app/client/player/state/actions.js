@@ -20,3 +20,12 @@ export class SetPlayerNameAction extends Action {
 }
 
 export class StartTurnAction extends Action { }
+
+export class EndTurnAction extends Action {
+  card: string;
+
+  constructor(card: string) {
+    super()
+    this.card = card
+  }
+}

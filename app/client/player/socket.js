@@ -59,6 +59,15 @@ export default class Socket {
         )
       }
     )
+
+    this.socket.on(
+      SocketCommands.endTurn,
+      (data: socketData.EndTurnData): void => {
+        this.state.dispatch(
+          new actions.EndTurnAction(data.card)
+        )
+      }
+    )
   }
 
   loginPlayer(name: string, color: string): void {

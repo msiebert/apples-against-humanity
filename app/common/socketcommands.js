@@ -10,4 +10,5 @@ module.exports = {
   selectCard: 'select card',
   startJudging: 'start judging',
   selectWinner: 'select winner',
+  endTurn: 'end turn',
 }

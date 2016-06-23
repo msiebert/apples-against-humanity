@@ -44,6 +44,8 @@ export default class Socket {
           .map((p: Player): string => p.selectedCard)
         this.state.dispatch(new commonActions.StartJudgingAction(cards))
         this.startJudging(cards)
+      } else if (game.status == GameStatus.showingWinner) {
+        this.endTurn(game.winningCard)
       }
     })
   }
@@ -72,6 +74,13 @@ export default class Socket {
 
   startTurn(): void {
     this.socket.emit(SocketCommands.startTurn, {
+      room: config.playerEventsRoom,
+    })
+  }
+
+  endTurn(card: string): void {
+    this.socket.emit(SocketCommands.endTurn, {
+      card,
       room: config.playerEventsRoom,
     })
   }

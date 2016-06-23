@@ -60,4 +60,6 @@ export const PlayerStatus = {
   waiting: 'waiting',
   waitingJudge: 'waiting judge',
   judging: 'judging',
+  waitingForNextTurn: 'waiting for next turn',
+  isWinner: 'is winner',
 }

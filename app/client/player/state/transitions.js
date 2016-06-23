@@ -39,6 +39,12 @@ export const playerTransition: TransitionFunction = (
     return transitions.selectCard(player, action)
   } else if (action instanceof commonActions.StartJudgingAction) {
     return transitions.startJudging(player, action)
+  } else if (action instanceof actions.EndTurnAction) {
+    if (player.selectedCard == action.card) {
+      return player.copy({status: PlayerStatus.isWinner})
+    } else {
+      return player.copy({status: PlayerStatus.waitingForNextTurn})
+    }
   } else {
     return player
   }

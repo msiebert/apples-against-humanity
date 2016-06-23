@@ -34,3 +34,8 @@ export type SelectWinnerData = {
   card: string,
   room: string,
 };
+
+export type EndTurnData = {
+  card: string,
+  room: string,
+};

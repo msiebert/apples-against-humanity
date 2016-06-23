@@ -13,7 +13,9 @@ import PickingCard from 'player/components/PickingCard.jsx'
 import Socket from 'player/socket'
 import * as actions from 'player/state/actions'
 import Waiting from 'player/components/Waiting.jsx'
+import WaitingForNextTurn from 'player/components/WaitingForNextTurn.jsx'
 import WaitingJudge from 'player/components/WaitingJudge.jsx'
+import Winner from 'player/components/Winner.jsx'
 
 import PlayerColors from 'styles/player/player-colors.scss'
 
@@ -72,6 +74,10 @@ export default class PlayerContainer extends Component {
     } else if (this.state.player.status == PlayerStatus.judging) {
       child = <Judging cards={this.state.player.cardsToJudge}
         selectCard={this.onSelectWinner.bind(this)} />
+    } else if (this.state.player.status == PlayerStatus.waitingForNextTurn) {
+      child = <WaitingForNextTurn />
+    } else if (this.state.player.status == PlayerStatus.isWinner) {
+      child = <Winner />
     } else {
       child = <Waiting key='player-waiting' />
     }

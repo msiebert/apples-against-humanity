@@ -127,6 +127,13 @@ const configureSockets = (io) => {
           io.to(data.room).emit(SocketCommands.selectWinner, data)
         }
       )
+
+      socket.on(
+        SocketCommands.endTurn,
+        (data: socketData.EndTurnData): void => {
+          io.to(data.room).emit(SocketCommands.endTurn, data)
+        }
+      )
     })
   })
 }
