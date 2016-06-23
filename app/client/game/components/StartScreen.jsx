@@ -24,7 +24,7 @@ export default class StartScreen extends Component {
     let startElement = <p key="waiting-message" className="waiting-message">
       waiting for more players
     </p>
-    if (players.size >= 3) {
+    if (players.size >= 1) {
       startElement = <Button className="start-button" color="blue" text="Start!"
         onClick={onStart} />
     }

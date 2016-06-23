@@ -1,4 +1,6 @@
 // @flow
+import {List} from 'immutable'
+
 import * as commonActions from 'client/common/state/actions'
 
 import * as config from 'common/config'
@@ -48,6 +50,15 @@ export default class Socket {
       SocketCommands.startTurn,
       (): void => { this.state.dispatch(new actions.StartTurnAction()) }
     )
+
+    this.socket.on(
+      SocketCommands.startJudging,
+      (data: socketData.StartJudgingData): void => {
+        this.state.dispatch(
+          new commonActions.StartJudgingAction(List(data.cards))
+        )
+      }
+    )
   }
 
   loginPlayer(name: string, color: string): void {
@@ -55,6 +66,21 @@ export default class Socket {
       name,
       color,
       room: config.gameEventsRoom,
+    })
+  }
+
+  selectCard(name: string, card: string): void {
+    this.socket.emit(SocketCommands.selectCard, {
+      name,
+      card,
+      room: config.gameEventsRoom
+    })
+  }
+
+  selectWinner(card: string): void {
+    this.socket.emit(SocketCommands.selectWinner, {
+      card,
+      room: config.gameEventsRoom
     })
   }
 }

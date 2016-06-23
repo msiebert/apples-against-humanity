@@ -36,3 +36,12 @@ export class AddContentAction extends Action {
 }
 
 export class StartTurnAction extends Action {}
+
+export class SelectWinnerAction extends Action {
+  card: string;
+
+  constructor(card: string) {
+    super()
+    this.card = card
+  }
+}

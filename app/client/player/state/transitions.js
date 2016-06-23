@@ -1,5 +1,6 @@
 // @flow
 import * as commonActions from 'client/common/state/actions'
+import * as transitions from 'client/common/state/transitions'
 
 import Action from 'common/state/action'
 import Player, {PlayerStatus} from 'common/models/player'
@@ -34,6 +35,10 @@ export const playerTransition: TransitionFunction = (
       status: player.isJudging ?
         PlayerStatus.waitingJudge : PlayerStatus.pickingCard,
     })
+  } else if (action instanceof commonActions.SelectCardAction) {
+    return transitions.selectCard(player, action)
+  } else if (action instanceof commonActions.StartJudgingAction) {
+    return transitions.startJudging(player, action)
   } else {
     return player
   }

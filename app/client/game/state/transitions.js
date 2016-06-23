@@ -2,6 +2,7 @@
 import {List} from 'immutable'
 
 import * as commonActions from 'client/common/state/actions'
+import * as transitions from 'client/common/state/transitions'
 
 import Game, {GameStatus} from 'common/models/game'
 import Player, {PlayerStatus} from 'common/models/player'
@@ -57,6 +58,40 @@ export const gameTransition: GameTransitionFunction = (
           isJudging: index == nextJudgeIndex,
         })
       })
+    })
+  } else if (action instanceof commonActions.SelectCardAction) {
+    const players = game.players.map((player: Player): Player => {
+      if (action instanceof commonActions.SelectCardAction) {
+        return transitions.selectCard(player, action)
+      } else return player
+    })
+    const allSelected = players.every((p: Player): boolean =>
+      p.selectedCard.length > 0 || p.isJudging
+    )
+    let updatedPlayers = players
+    if (allSelected) {
+      updatedPlayers = players.map((player: Player): Player => {
+        if (player.isJudging) return player.copy({status: PlayerStatus.judging})
+        else return player
+      })
+    }
+    return game.copy({
+      players: updatedPlayers,
+      status: allSelected ? GameStatus.startingJudging : game.status,
+    })
+  } else if (action instanceof commonActions.StartJudgingAction) {
+    return game.copy({
+      status: GameStatus.judging,
+      players: game.players.map((p: Player): Player => {
+        if (action instanceof commonActions.StartJudgingAction) {
+          return transitions.startJudging(p, action)
+        } else return p
+      })
+    })
+  } else if (action instanceof actions.SelectWinnerAction) {
+    return game.copy({
+      status: GameStatus.showingWinner,
+      winningCard: action.card,
     })
   } else {
     return game

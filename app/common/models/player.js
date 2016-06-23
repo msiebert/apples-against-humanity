@@ -1,5 +1,5 @@
 // @flow
-import {Set} from 'immutable'
+import {List, Set} from 'immutable'
 
 import Colors from 'common/colors'
 
@@ -9,6 +9,8 @@ class PlayerProperties {
   cards: Set<string>;
   status: string;
   isJudging: boolean;
+  selectedCard: string;
+  cardsToJudge: List<string>;
 }
 
 export default class Player extends PlayerProperties {
@@ -17,7 +19,9 @@ export default class Player extends PlayerProperties {
       color: ?string,
       cards: ?Set<string>,
       status: ?string,
-      isJudging: ?boolean
+      isJudging: ?boolean,
+      selectedCard: ?string,
+      cardsToJudge: ?List<string>
   ) {
     super()
     this.name = name || ''
@@ -25,6 +29,8 @@ export default class Player extends PlayerProperties {
     this.cards = cards || Set()
     this.status = status || PlayerStatus.loggingIn
     this.isJudging = !!isJudging
+    this.selectedCard = selectedCard || ''
+    this.cardsToJudge = cardsToJudge || List()
   }
 
   copy({
@@ -32,14 +38,18 @@ export default class Player extends PlayerProperties {
     color,
     cards,
     status,
-    isJudging
+    isJudging,
+    selectedCard,
+    cardsToJudge
   }: $Shape<PlayerProperties>): Player {
     return new Player(
       name || this.name,
       color || this.color,
       cards || this.cards,
       status || this.status,
-      isJudging || this.isJudging
+      isJudging || this.isJudging,
+      selectedCard || this.selectedCard,
+      cardsToJudge || this.cardsToJudge
     )
   }
 }
@@ -49,4 +59,5 @@ export const PlayerStatus = {
   pickingCard: 'picking card',
   waiting: 'waiting',
   waitingJudge: 'waiting judge',
+  judging: 'judging',
 }

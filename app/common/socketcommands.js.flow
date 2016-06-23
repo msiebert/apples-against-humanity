@@ -18,3 +18,19 @@ export type SetJudgeData = {
 export type DefaultData = {
   room: string,
 };
+
+export type SelectCardData = {
+  name: string,
+  card: string,
+  room: string,
+};
+
+export type StartJudgingData = {
+  cards: Array<string>,
+  room: string,
+};
+
+export type SelectWinnerData = {
+  card: string,
+  room: string,
+};

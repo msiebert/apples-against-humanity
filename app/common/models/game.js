@@ -11,6 +11,7 @@ class GameProperties {
   serverAddress: string;
   status: string;
   currentPrompt: string;
+  winningCard: string;
 }
 
 export default class Game extends GameProperties {
@@ -21,7 +22,8 @@ export default class Game extends GameProperties {
       currentJudge: ?number,
       serverAddress: ?string,
       status: ?string,
-      currentPrompt: ?string
+      currentPrompt: ?string,
+      winningCard: ?string
   ) {
     super()
     this.players = players || List()
@@ -31,6 +33,7 @@ export default class Game extends GameProperties {
     this.serverAddress = serverAddress || ''
     this.status = status || GameStatus.start
     this.currentPrompt = currentPrompt || ''
+    this.winningCard = winningCard || ''
   }
 
   copy({
@@ -40,7 +43,8 @@ export default class Game extends GameProperties {
     currentJudge,
     serverAddress,
     status,
-    currentPrompt
+    currentPrompt,
+    winningCard,
   }: $Shape<GameProperties>): Game {
     return new Game(
       players || this.players,
@@ -49,7 +53,8 @@ export default class Game extends GameProperties {
       (currentJudge != undefined) ? currentJudge : this.currentJudge,
       serverAddress || this.serverAddress,
       status || this.status,
-      currentPrompt || this.currentPrompt
+      currentPrompt || this.currentPrompt,
+      winningCard || this.winningCard
     )
   }
 }
@@ -58,4 +63,7 @@ export const GameStatus = {
   start: 'start',
   selectingContent: 'selecting content',
   submittingCards: 'submitting cards',
+  startingJudging: 'starting judging',
+  judging: 'judging',
+  showingWinner: 'showing winner',
 }

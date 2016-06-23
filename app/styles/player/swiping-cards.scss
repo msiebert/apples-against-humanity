@@ -1,0 +1,18 @@
+.player-cards {
+  height: calc(100% - 50px);
+
+  .swipe {
+    height: 80%;
+
+    & > div {
+      height: 100%;
+    }
+  }
+
+  .swipe-instructions {
+    margin: auto;
+
+    color: white;
+    text-align: center;
+  }
+}

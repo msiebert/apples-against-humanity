@@ -1,0 +1,12 @@
+@import '~styles/colors';
+
+.colored-block {
+  padding: 20px;
+
+  color: white;
+  text-align: center;
+
+  @include drop-shadow-2;
+
+  @include with-colors;
+}

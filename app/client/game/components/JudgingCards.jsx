@@ -4,30 +4,26 @@ import React, {Component} from 'react'
 
 import Player from 'common/models/player'
 
-import PlayerBlocks from 'game/components/PlayerBlocks.jsx'
+import PlayerSubmissions from 'game/components/PlayerSubmissions.jsx'
 import Prompt from 'game/components/Prompt.jsx'
 
-import styles from 'styles/game/submitting-cards.scss'
+import styles from 'styles/game/judging-cards.scss'
 
 type Props = {
   prompt: string,
   players: List<Player>,
   judge: Player,
 };
-export default class SubmittingCards extends Component {
+export default class JudgingCards extends Component {
   props: Props;
-
-  constructor(props: Props) {
-    super(props)
-  }
 
   render() {
     const {prompt, judge, players} = this.props
     return (
-      <div className="submitting-cards">
+      <div className="judging-cards">
         <Prompt prompt={prompt} />
-        <h3 className="judge">{judge.name} is the judge!</h3>
-        <PlayerBlocks players={players} />
+        <h3 className="judge">{judge.name} is picking the winner...</h3>
+        <PlayerSubmissions players={players} />
       </div>
     )
   }

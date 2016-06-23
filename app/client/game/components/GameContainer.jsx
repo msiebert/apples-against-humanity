@@ -10,8 +10,10 @@ import Player from 'common/models/player'
 import StateMachine from 'common/state/statemachine'
 
 import ContentSelection from 'game/components/ContentSelection.jsx'
+import JudgingCards from 'game/components/JudgingCards.jsx'
 import StartScreen from 'game/components/StartScreen.jsx'
 import SubmittingCards from 'game/components/SubmittingCards.jsx'
+import WinningCard from 'game/components/WinningCard.jsx'
 import Socket from 'game/socket'
 import * as actions from 'game/state/actions'
 
@@ -46,15 +48,27 @@ export default class GameContainer extends Component {
     } else if (game.status == GameStatus.selectingContent) {
       child = <ContentSelection key="game-content-selection"
         loadContentPacks={this.loadContentPacks.bind(this)} />
-    } else if (game.status == GameStatus.submittingCards) {
+    } else if (game.status == GameStatus.submittingCards || game.status == GameStatus.judging) {
       const players = game.players.filterNot((p: Player): boolean => {
         return p.isJudging
       })
       const judge = game.players.filter((p: Player): boolean => {
         return p.isJudging
       }).get(0)
-      child = <SubmittingCards key="game-submitting-cards"
-        prompt={game.currentPrompt} players={players} judge={judge} />
+
+      if (game.status == GameStatus.submittingCards) {
+        child = <SubmittingCards key="game-submitting-cards"
+          prompt={game.currentPrompt} players={players} judge={judge} />
+      } else {
+        child = <JudgingCards key="game-judging-cards"
+          prompt={game.currentPrompt} players={players} judge={judge} />
+      }
+    } else if (game.status == GameStatus.showingWinner) {
+      const winner = game.players.find((p: Player): boolean => p.selectedCard == game.winningCard)
+      if (winner) {
+        child = <WinningCard key="game-winning-card" color={winner.color} winner={winner.name}
+          prompt={game.currentPrompt} card={game.winningCard} />
+      }
     }
 
     return (

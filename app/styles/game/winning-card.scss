@@ -1,0 +1,17 @@
+@import '~styles/colors';
+
+.winning-card {
+  .winner-is {
+    color: $font-color-light;
+    text-align: center;
+    font-size: 30px;
+  }
+
+  .winning-card-winner {
+    font-size: 28px;
+  }
+
+  .winning-card-text {
+    font-size: 48px;
+  }
+}

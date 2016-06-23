@@ -106,6 +106,27 @@ const configureSockets = (io) => {
           io.to(data.room).emit(SocketCommands.startTurn)
         }
       )
+
+      socket.on(
+        SocketCommands.selectCard,
+        (data: socketData.SelectCardData): void => {
+          io.to(data.room).emit(SocketCommands.selectCard, data)
+        }
+      )
+
+      socket.on(
+        SocketCommands.startJudging,
+        (data: socketData.StartJudgingData): void => {
+          io.to(data.room).emit(SocketCommands.startJudging, data)
+        }
+      )
+
+      socket.on(
+        SocketCommands.selectWinner,
+        (data: socketData.SelectWinnerData): void => {
+          io.to(data.room).emit(SocketCommands.selectWinner, data)
+        }
+      )
     })
   })
 }

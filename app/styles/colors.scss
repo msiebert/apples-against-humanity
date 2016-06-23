@@ -21,7 +21,7 @@ $blue-gray: #607D8B;
 $font-color-dark: #444;
 $font-color-light: #666;
 
-$header-color: #fafafa;
+$off-white: #fafafa;
 
 @mixin drop-shadow-1 {
   box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
@@ -41,5 +41,84 @@ $header-color: #fafafa;
     outline: none;
     border: 1px solid $color;
     transition: all $time ease-in-out;
+  }
+}
+
+@mixin with-colors {
+  &.amber {
+    background-color: $amber;
+  }
+
+  &.blue {
+    background-color: $blue;
+  }
+
+  &.blue-gray {
+    background-color: $blue-gray;
+  }
+
+  &.brown {
+    background-color: $brown;
+  }
+
+  &.cyan {
+    background-color: $cyan;
+  }
+
+  &.deep-orange {
+    background-color: $deep-orange;
+  }
+
+  &.deep-purple {
+    background-color: $deep-purple;
+  }
+
+  &.gray {
+    background-color: $gray;
+  }
+
+  &.green {
+    background-color: $green;
+  }
+
+  &.indigo {
+    background-color: $indigo;
+  }
+
+  &.light-blue {
+    background-color: $light-blue;
+  }
+
+  &.light-green {
+    background-color: $light-green;
+  }
+
+  &.lime {
+    background-color: $lime;
+    color: $font-color-dark;
+  }
+
+  &.orange {
+    background-color: $orange;
+  }
+
+  &.pink {
+    background-color: $pink;
+  }
+
+  &.purple {
+    background-color: $purple;
+  }
+
+  &.red {
+    background-color: $red;
+  }
+
+  &.teal {
+    background-color: $teal;
+  }
+
+  &.yellow {
+    background-color: $yellow;
   }
 }

@@ -1,0 +1,38 @@
+@import '~styles/colors';
+
+.card-outer {
+  position: relative;
+  float: left;
+
+  height: 100%;
+  width: 100%;
+}
+
+.card-wrapper {
+  height: 100%;
+
+  .card {
+    position: relative;
+
+    height: 90%;
+    width: 80%;
+    margin: 20px auto;
+
+    background-color: $off-white;
+
+    @include drop-shadow-2;
+
+    .text {
+      position: absolute;
+      top: 40%;
+      transform: translateY(-50%);
+
+      margin: 0;
+      width: 100%;
+      padding: 10px;
+
+      color: $font-color-dark;
+      text-align: center;
+    }
+  }
+}
