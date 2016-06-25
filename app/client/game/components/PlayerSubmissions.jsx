@@ -17,12 +17,12 @@ export default class PlayerSubmissions extends Component {
 
   render() {
     const {players} = this.props
-    const playerRows = players
+    const playerRows = players.sortBy(p => Math.random())
       .groupBy((value: Player, index: number) => Math.floor(index / 3))
       .toList()
       .map((players: List<Player>, index: number) => {
         const row = players.map((player: Player) => {
-          return <ColoredBlock key={`player-submission-${player.name}`} color={player.color}
+          return <ColoredBlock key={`player-submission-${player.name}`} color="white"
             additionalClasses="col-4">
             <h1 className="player-submission-card">{player.selectedCard}</h1>
           </ColoredBlock>
