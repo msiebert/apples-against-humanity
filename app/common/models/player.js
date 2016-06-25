@@ -47,7 +47,7 @@ export default class Player extends PlayerProperties {
       color || this.color,
       cards || this.cards,
       status || this.status,
-      isJudging || this.isJudging,
+      (isJudging != undefined) ? isJudging : this.isJudging,
       selectedCard || this.selectedCard,
       cardsToJudge || this.cardsToJudge
     )

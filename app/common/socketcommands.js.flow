@@ -39,3 +39,7 @@ export type EndTurnData = {
   card: string,
   room: string,
 };
+
+export type ResetTurnData = {
+  room: string,
+};

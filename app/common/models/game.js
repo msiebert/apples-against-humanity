@@ -62,6 +62,8 @@ export default class Game extends GameProperties {
 export const GameStatus = {
   start: 'start',
   selectingContent: 'selecting content',
+  distributingCards: 'distributing cards',
+  startingTurn: 'starting turn',
   submittingCards: 'submitting cards',
   startingJudging: 'starting judging',
   judging: 'judging',

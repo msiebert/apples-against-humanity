@@ -37,6 +37,8 @@ export class AddContentAction extends Action {
 
 export class StartTurnAction extends Action {}
 
+export class TurnStartedAction extends Action {}
+
 export class SelectWinnerAction extends Action {
   card: string;
 

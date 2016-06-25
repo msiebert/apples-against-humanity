@@ -29,3 +29,5 @@ export class EndTurnAction extends Action {
     this.card = card
   }
 }
+
+export class ResetTurnAction extends Action { }

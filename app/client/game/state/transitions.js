@@ -39,6 +39,7 @@ export const gameTransition: GameTransitionFunction = (
       }
     })
     return game.copy({
+      status: GameStatus.distributingCards,
       unusedCards: unusedCards,
       players: players
     })
@@ -48,7 +49,7 @@ export const gameTransition: GameTransitionFunction = (
     const nextPrompt = unusedPrompts.get(Math.random() * unusedPrompts.size)
     return game.copy({
       currentJudge: nextJudgeIndex,
-      status: GameStatus.submittingCards,
+      status: GameStatus.startingTurn,
       unusedPrompts: game.unusedPrompts.delete(nextPrompt),
       currentPrompt: nextPrompt,
       players: game.players.map((player: Player, index: number): Player => {
@@ -56,8 +57,13 @@ export const gameTransition: GameTransitionFunction = (
           status: index == nextJudgeIndex ?
             PlayerStatus.waitingJudge : PlayerStatus.pickingCard,
           isJudging: index == nextJudgeIndex,
+          selectedCard: '',
         })
       })
+    })
+  } else if (action instanceof actions.TurnStartedAction) {
+    return game.copy({
+      status: GameStatus.submittingCards,
     })
   } else if (action instanceof commonActions.SelectCardAction) {
     const players = game.players.map((player: Player): Player => {

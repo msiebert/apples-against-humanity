@@ -11,4 +11,5 @@ module.exports = {
   startJudging: 'start judging',
   selectWinner: 'select winner',
   endTurn: 'end turn',
+  resetTurn: 'reset turn',
 }

@@ -34,6 +34,7 @@ export const playerTransition: TransitionFunction = (
     return player.copy({
       status: player.isJudging ?
         PlayerStatus.waitingJudge : PlayerStatus.pickingCard,
+      selectedCard: '',
     })
   } else if (action instanceof commonActions.SelectCardAction) {
     return transitions.selectCard(player, action)

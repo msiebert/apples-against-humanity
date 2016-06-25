@@ -36,6 +36,18 @@ export default class GameContainer extends Component {
 
     props.stateMachine.subscribe((game: Game) => {
       this.setState({game})
+
+      if (game.status == GameStatus.showingWinner) {
+        setTimeout(() => {
+          this.givePlayersCards()
+          this.startTurn()
+        }, 5000)
+      } else if (game.status == GameStatus.startingTurn) {
+        const {game} = this.state
+        this.props.socket.setJudge(game.players.get(game.currentJudge).name)
+        this.props.socket.startTurn()
+        props.stateMachine.dispatch(new actions.TurnStartedAction())
+      }
     })
   }
 
@@ -48,7 +60,8 @@ export default class GameContainer extends Component {
     } else if (game.status == GameStatus.selectingContent) {
       child = <ContentSelection key="game-content-selection"
         loadContentPacks={this.loadContentPacks.bind(this)} />
-    } else if (game.status == GameStatus.submittingCards || game.status == GameStatus.judging) {
+    } else if (game.status == GameStatus.startingTurn || game.status == GameStatus.submittingCards ||
+        game.status == GameStatus.judging) {
       const players = game.players.filterNot((p: Player): boolean => {
         return p.isJudging
       })
@@ -56,7 +69,7 @@ export default class GameContainer extends Component {
         return p.isJudging
       }).get(0)
 
-      if (game.status == GameStatus.submittingCards) {
+      if (game.status == GameStatus.startingTurn || game.status == GameStatus.submittingCards) {
         child = <SubmittingCards key="game-submitting-cards"
           prompt={game.currentPrompt} players={players} judge={judge} />
       } else {
@@ -106,8 +119,5 @@ export default class GameContainer extends Component {
 
   startTurn(): void {
     this.props.stateMachine.dispatch(new actions.StartTurnAction())
-    const {game} = this.state
-    this.props.socket.setJudge(game.players.get(game.currentJudge).name)
-    this.props.socket.startTurn()
   }
 }
